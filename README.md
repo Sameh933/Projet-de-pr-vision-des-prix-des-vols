@@ -20,18 +20,38 @@ Les fluctuations des prix des vols posent un défi important pour les voyageurs.
 
 ## Rapport Final
 ### Récapitulation des Résultats
-- Comparaison des résultats obtenus avec les objectifs initiaux.
+- Le modèle atteint  l'objectif initial de 80%.
+- Les variables significatives incluent la durée, le nombre de jours restants, la classe économique, et la classe affaires.
+
+### Méthodologie
+1. **Modèles de Régression :**
+   - Utilisation de régression linéaire pour modéliser les relations linéaires.
+   - Entraînement et évaluation du modèle sur un ensemble d'entraînement et de test.
+
+2. **Ensemble d'Arbres de Décision :**
+   - Exploration des modèles d'arbres de décision pour capturer des relations non linéaires.
+
+3. **Ingénierie des Caractéristiques :**
+   - Création d'indicateurs de classe et gestion des valeurs manquantes.
+
+### Visualisations
+- Histogramme de la distribution des prix.
+- Graphique interactif montrant la distribution des prix en fonction des compagnies aériennes et des plages de prix sélectionnées.
+
+### Évaluation de la Performance
+- MSE (Mean Squared Error) pour évaluer la performance du modèle.
 
 ### Conclusion
-Récapitulez les résultats obtenus par rapport aux objectifs fixés.
+Le projet a atteint ses objectifs avec succès en développant un modèle performant pour la prévision des prix des vols. Les analyses détaillées soulignent l'importance des variables telles que la durée du vol et le nombre de jours restants.
 
 ## Fichiers R Markdown et HTML
-Le fichier R Markdown (`.Rmd`) contient le code et la documentation détaillée de l'analyse. Pour générer le rapport final, vous pouvez tricoter le fichier R Markdown pour créer un fichier HTML. Vous pouvez accéder au rapport final [ici](lien-vers-votre-fichier-html).
+Le fichier R Markdown (`.Rmd`) contient le code et la documentation détaillée de l'analyse. Pour générer le rapport final, vous pouvez tricoter le fichier R Markdown pour créer un fichier HTML. Vous pouvez accéder au rapport final ( voir dans les documents ajoutés).
+
 
 ## Comment Utiliser ce Projet
 ### Installation
 1. Assurez-vous d'avoir R et RStudio installés sur votre machine.
-2. Téléchargez les fichiers du projet depuis [ce dépôt GitHub](lien-vers-votre-repo).
+2. Téléchargez les fichiers du projet depuis ce lien :
 3. Ouvrez le fichier R Markdown dans RStudio.
 
 ### Exécution du Projet
