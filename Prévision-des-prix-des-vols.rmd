@@ -1,0 +1,77 @@
+---
+title: "Prévision rpix des vols"
+author: "Sameh Merdassi"
+date: "2023-12-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+
+# Charger les bibliothèques nécessaires
+library(tidyverse)
+library(caret)
+library(glmnet)
+
+# Charger les données
+data <- read.csv("C:/Users/Dell/OneDrive/Bureau/Clean_Dataset.csv")
+data$departure_time <- as.POSIXct(data$departure_time, format = "%H:%M:%S", tz = "UTC")
+data$departure_time[is.na(data$departure_time)] <- as.POSIXct("00:00:00", format = "%H:%M:%S", tz = "UTC")
+
+# Gestion d'une colonne supplémentaire (exemple avec "variable_a_nettoyer")
+if ("variable_a_nettoyer" %in% names(data)) {
+data$variable_a_nettoyer <- ifelse(is.na(data$variable_a_nettoyer), mean(data$variable_a_nettoyer, na.rm = TRUE), data$variable_a_nettoyer)
+}
+
+# Analyse exploratoire des données (EDA)
+summary(data)
+
+# Visualisation des données (exemple avec un histogramme):
+hist(data$price, main = "Distribution des prix des vols", xlab = "Prix")
+# Préparation des données pour le modèle:
+data <- data %>%
+mutate(class_economy = ifelse(class == "Economy", 1, 0),
+class_business = ifelse(class == "Business", 1, 0))
+
+# Optimisation des modèles (exemple avec une régression linéaire)
+
+set.seed(123)  # Pour la reproductibilité des résultats
+train_indices <- createDataPartition(data$price, p = 0.8, list = FALSE)
+train_data <- data[train_indices, ]
+test_data <- data[-train_indices, ]
+
+# Exemple de régression linéaire
+linear_model <- lm(price ~ duration + days_left + class_economy + class_business, data = train_data)
+
+# Afficher les coefficients du modèle
+summary(linear_model)
+
+# Faire des prédictions sur l'ensemble de test
+predictions <- predict(linear_model, newdata = test_data)
+
+# Évaluer la performance du modèle (exemple avec la MSE)
+mse <- mean((predictions - test_data$price)^2)
+cat("Mean Squared Error:", mse, "\n")
+# Mise à jour du fichier R Markdown (Rmd)
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
